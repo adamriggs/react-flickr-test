@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import $ from 'jquery';
 import Masonry from 'react-masonry-component';
-import Keys from './keys/keys.json';
+import {keys} from './keys/keys.json';
 
 class Flickr extends React.Component {
 
@@ -24,7 +24,7 @@ class Flickr extends React.Component {
 	componentDidMount() {
 		console.log('Flickr.componentDidMount()');
 
-		$.get(Keys.keys.url, (data)=>this.handleData(data));
+		$.get(keys.url, (data)=>this.handleData(data));
 
 	}
 

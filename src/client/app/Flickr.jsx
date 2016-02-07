@@ -63,8 +63,8 @@ class Flickr extends React.Component {
 		return (
 
 			<Masonry
-                className={'my-gallery-class'} // default ''
-                elementType={'ul'} // default 'div'
+                className={'flickr-gallery'} // default ''
+                elementType={'div'} // default 'div'
                 options={masonryOptions} // default {}
                 disableImagesLoaded={false} // default false
             >

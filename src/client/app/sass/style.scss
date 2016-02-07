@@ -2,4 +2,6 @@ $pic-width: 400px;
 
 .flickr-pic {
 	width: $pic-width;
+	margin: 10px;
+	border: 1px solid black;
 }

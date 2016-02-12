@@ -57,7 +57,7 @@ class Flickr extends React.Component {
 		});
 
 		let masonryOptions = {
-		    transitionDuration: 0
+		    transitionDuration: 1
 		};
 
 		return (

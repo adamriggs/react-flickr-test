@@ -7,22 +7,45 @@ var APP_DIR = path.resolve(__dirname, 'src/client/app');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var config = {
-  entry: APP_DIR + '/index.jsx',
+  // entry: APP_DIR + '/index.jsx',
+
+  entry: {
+    App: [
+      'webpack-dev-server/client?http://localhost:3000/',
+      'webpack/hot/only-dev-server',
+      APP_DIR + '/index.jsx',
+    ]
+  },
+
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: 'http://localhost:3000/'
   },
+
+  plugins: [
+      new ExtractTextPlugin('style.css', {
+          allChunks: true
+      }),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
+  ],
+
   module : {
     loaders : [
-    
+
       // ES6 & JSX
       {
-        test : /\.jsx?/,
+        test : /\.jsx$/,
         include : APP_DIR,
-        loader : 'babel',
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loaders: ['react-hot', 'babel']
+      },
+
+      // ES5
+      { 
+        test: /\.js$/,
+        loader: 'babel'
+        //exclude: '/node_modules/'
       },
 
       //Masonry
@@ -38,17 +61,18 @@ var config = {
         loader: ExtractTextPlugin.extract('css!sass')
       },
 
+      // CSS
+      { 
+        test: /\.css$/,
+        loader: 'style!css' 
+      },
+
       //JSON
       { test: /\.json$/,
         loader: 'json-loader'
       },
     ]
-  },
-    plugins: [
-        new ExtractTextPlugin('style.css', {
-            allChunks: true
-        })
-    ]
+  }
 };
 
 module.exports = config;
